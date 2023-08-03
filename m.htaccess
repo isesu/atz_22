@@ -1,0 +1,33 @@
+# BEGIN WordPress
+# Директивы (строки) между `BEGIN WordPress` и `END WordPress`
+# созданы автоматически и подлежат изменению только через фильтры WordPress.
+# Сделанные вручную изменения между этими маркерами будут перезаписаны.
+<IfModule mod_rewrite.c>
+RewriteEngine On
+RewriteRule .* - [E=HTTP_AUTHORIZATION:%{HTTP:Authorization}]
+RewriteBase /
+RewriteRule ^index\.php$ - [L]
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteRule . /index.php [L]
+</IfModule>
+
+# END WordPress
+
+php_value short_open_tag 1
+php_value display_errors 1
+php_value error_reporting 2047
+
+# Backup Migration START
+  <IfModule mod_rewrite.c>
+
+    RewriteEngine On
+    RewriteRule .* - [E=noconntimeout:1,E=noabort:1]
+
+  </IfModule>
+  <IfModule mod_env>
+
+    SetEnv noabort 1
+
+  </IfModule>
+# Backup Migration END
